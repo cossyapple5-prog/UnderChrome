@@ -280,7 +280,7 @@
           const checkActionable = findValidClickableElement(dashTarget);
           if (checkActionable && typeof checkActionable.click === 'function' && !window.clickCooldown) {
             
-            // ⚡ JUSTICE-STYLE TIMED DECAY FLASH REGISTER
+            // TIMED DECAY FLASH REGISTER LIKE JUSTICE SOUL MODE
             const origBg = checkActionable.style.backgroundColor;
             checkActionable.style.backgroundColor = "#00cbff"; 
             setTimeout(() => { checkActionable.style.backgroundColor = origBg; }, 120);
