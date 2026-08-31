@@ -253,7 +253,13 @@
         if (chargeTarget) {
           const checkActionable = findValidClickableElement(chargeTarget);
           if (checkActionable && typeof checkActionable.click === 'function' && !window.clickCooldown) {
-            checkActionable.style.backgroundColor = "#00cbff"; checkActionable.click();
+            
+            // Flash effect for bravery soul like the one for justice
+            const origBg = checkActionable.style.backgroundColor;
+            checkActionable.style.backgroundColor = "#00cbff"; 
+            setTimeout(() => { checkActionable.style.backgroundColor = origBg; }, 120);
+            
+            checkActionable.click();
             window.clickCooldown = true; setTimeout(() => window.clickCooldown = false, 300);
           }
         }
@@ -273,10 +279,16 @@
         if (dashTarget) {
           const checkActionable = findValidClickableElement(dashTarget);
           if (checkActionable && typeof checkActionable.click === 'function' && !window.clickCooldown) {
-            checkActionable.style.backgroundColor = "#00cbff";
+            
+            // ⚡ JUSTICE-STYLE TIMED DECAY FLASH REGISTER
+            const origBg = checkActionable.style.backgroundColor;
+            checkActionable.style.backgroundColor = "#00cbff"; 
+            setTimeout(() => { checkActionable.style.backgroundColor = origBg; }, 120);
+            
             if (typeof checkActionable.dispatchEvent === 'function') {
               checkActionable.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
             } else { checkActionable.click(); }
+            
             window.clickCooldown = true; setTimeout(() => window.clickCooldown = false, 300);
             window.orangeVx = window.orangeVx > 0 ? -7 : 7; 
           }
@@ -285,6 +297,7 @@
       }
       if (window.x > screenWidth) { window.x = -20; } else if (window.x < -24) { window.x = screenWidth; }
     }
+
 
     if (window.currentMode === 'yellow' && window.bullets.length > 0) {
       window.bullets.forEach((b) => {
